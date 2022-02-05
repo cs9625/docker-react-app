@@ -1,0 +1,26 @@
+version: "3"
+services:
+  react:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+     - "3000:3000"
+    volumes:
+     - ./:/home/ret
+    environment:
+     - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    privileged: true
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+     - ./:/home/ret
+    environment:
+     - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    privileged: true
+    command: ["npm", "run", "test"]
+
